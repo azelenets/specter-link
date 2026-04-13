@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, type KeyboardEvent } from 'react';
+import { memo, useCallback, useRef, useEffect, useState, type KeyboardEvent } from 'react';
 import { Button, Input } from '@azelenets/aegis-design-system';
 import type { Message } from '@/hooks/usePeer';
 
@@ -9,7 +9,7 @@ interface ChatProps {
   onSend: (text: string) => void;
 }
 
-export default function Chat({ messages, onSend }: ChatProps) {
+function Chat({ messages, onSend }: ChatProps) {
   const [input, setInput]   = useState('');
   const scrollRef           = useRef<HTMLDivElement>(null);
 
@@ -20,19 +20,19 @@ export default function Chat({ messages, onSend }: ChatProps) {
     }
   }, [messages]);
 
-  const handleSend = () => {
+  const handleSend = useCallback(() => {
     const text = input.trim();
     if (!text) return;
     onSend(text);
     setInput('');
-  };
+  }, [input, onSend]);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
-  };
+  }, [handleSend]);
 
   return (
     <div className="chat-container">
@@ -145,3 +145,8 @@ export default function Chat({ messages, onSend }: ChatProps) {
     </div>
   );
 }
+
+const MemoizedChat = memo(Chat);
+MemoizedChat.displayName = 'Chat';
+
+export default MemoizedChat;

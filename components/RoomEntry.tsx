@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type KeyboardEvent } from 'react';
+import { memo, useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Button, Input, Spinner } from '@azelenets/aegis-design-system';
 
 interface RoomEntryProps {
@@ -9,23 +9,35 @@ interface RoomEntryProps {
   status: string;
 }
 
-export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
+function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
   const [remoteId, setRemoteId] = useState('');
   const [error, setError]       = useState('');
   const [copied, setCopied]     = useState(false);
+  const copyResetTimeoutRef     = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCopy = async () => {
+  useEffect(() => {
+    return () => {
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopy = useCallback(async () => {
     if (!peerId) return;
     try {
       await navigator.clipboard.writeText(peerId);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+      copyResetTimeoutRef.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       // Clipboard API may be unavailable in non-secure contexts
     }
-  };
+  }, [peerId]);
 
-  const handleJoin = () => {
+  const handleJoin = useCallback(() => {
     const trimmed = remoteId.trim();
     if (!trimmed) {
       setError('Please enter the remote peer ID');
@@ -37,11 +49,11 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
     }
     setError('');
     onJoin(trimmed);
-  };
+  }, [onJoin, peerId, remoteId]);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') handleJoin();
-  };
+  }, [handleJoin]);
 
   return (
     <div className="room-entry">
@@ -186,3 +198,8 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
     </div>
   );
 }
+
+const MemoizedRoomEntry = memo(RoomEntry);
+MemoizedRoomEntry.displayName = 'RoomEntry';
+
+export default MemoizedRoomEntry;

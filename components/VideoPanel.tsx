@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { memo, useRef, useEffect } from 'react';
 
 interface VideoPanelProps {
   localStream: MediaStream | null;
@@ -8,7 +8,7 @@ interface VideoPanelProps {
   callActive: boolean;
 }
 
-export default function VideoPanel({ localStream, remoteStream, callActive }: VideoPanelProps) {
+function VideoPanel({ localStream, remoteStream, callActive }: VideoPanelProps) {
   const localRef  = useRef<HTMLVideoElement>(null);
   const remoteRef = useRef<HTMLVideoElement>(null);
 
@@ -157,3 +157,8 @@ export default function VideoPanel({ localStream, remoteStream, callActive }: Vi
     </div>
   );
 }
+
+const MemoizedVideoPanel = memo(VideoPanel);
+MemoizedVideoPanel.displayName = 'VideoPanel';
+
+export default MemoizedVideoPanel;
