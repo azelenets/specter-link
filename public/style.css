@@ -1,0 +1,18 @@
+/*
+ * specter-link — static style reference
+ *
+ * The actual processed styles live in app/globals.css and are compiled by
+ * Next.js. This file is kept in public/ as a specification reference and
+ * can be served as a static asset if needed.
+ *
+ * Custom CSS classes used in this project:
+ *   .room-entry        — lobby container (max-width column)
+ *   .call-container    — two-column grid: video | chat
+ *   .chat-container    — flex column: header / messages / input
+ *   .message-self      — chat bubble sent by the local user
+ *   .message-peer      — chat bubble received from the remote peer
+ *   .video-local       — local <video> element (mirrored)
+ *   .video-remote      — remote <video> element (full size)
+ *
+ * See app/globals.css for the full implementation.
+ */
