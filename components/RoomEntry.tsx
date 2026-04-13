@@ -51,7 +51,7 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
           style={{
             fontSize: '0.625rem',
             fontWeight: 700,
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             textTransform: 'uppercase',
             letterSpacing: '0.18em',
             color: 'rgb(100 116 139)',
@@ -76,7 +76,7 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
             <span
               style={{
                 fontSize: '0.75rem',
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: 'var(--font-mono), monospace',
                 color: 'rgb(100 116 139)',
               }}
             >
@@ -92,7 +92,7 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
                 padding: '0.6rem 0.75rem',
                 border: '1px solid rgb(var(--color-border-dark))',
                 background: 'rgb(var(--color-surface-terminal))',
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.8rem',
                 color: 'rgb(var(--color-primary))',
                 letterSpacing: '0.02em',
@@ -115,7 +115,7 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
         <p
           style={{
             fontSize: '0.625rem',
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             color: 'rgb(51 65 85)',
             margin: 0,
           }}
@@ -130,7 +130,7 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
         <span
           style={{
             fontSize: '0.625rem',
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             color: 'rgb(51 65 85)',
             textTransform: 'uppercase',
             whiteSpace: 'nowrap',
@@ -172,7 +172,7 @@ export default function RoomEntry({ peerId, onJoin, status }: RoomEntryProps) {
         <p
           style={{
             fontSize: '0.625rem',
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             color: 'rgb(100 116 139)',
             textTransform: 'uppercase',
             textAlign: 'center',

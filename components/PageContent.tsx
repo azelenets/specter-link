@@ -53,7 +53,7 @@ export default function Page() {
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <h1
             style={{
-              fontFamily: "'Orbitron', sans-serif",
+              fontFamily: 'var(--font-brand), sans-serif',
               fontSize: '2rem',
               fontWeight: 900,
               color: '#fff',
@@ -68,7 +68,7 @@ export default function Page() {
           <p
             style={{
               fontSize: '0.6rem',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               color: 'rgb(51 65 85)',
               textTransform: 'uppercase',
               letterSpacing: '0.22em',
@@ -98,7 +98,7 @@ export default function Page() {
           style={{
             marginTop: '1.5rem',
             fontSize: '0.5625rem',
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             color: 'rgb(51 65 85)',
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
@@ -129,7 +129,7 @@ export default function Page() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginRight: 'auto' }}>
           <span
             style={{
-              fontFamily: "'Orbitron', sans-serif",
+              fontFamily: 'var(--font-brand), sans-serif',
               fontSize: '0.75rem',
               fontWeight: 900,
               color: '#fff',
@@ -144,7 +144,7 @@ export default function Page() {
               padding: '0.1rem 0.45rem',
               fontSize: '0.5rem',
               fontWeight: 700,
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               textTransform: 'uppercase',
               letterSpacing: '0.12em',
               background: 'rgb(var(--color-primary))',
@@ -255,7 +255,7 @@ export default function Page() {
               flex: 1,
               fontSize: '0.7rem',
               fontWeight: 700,
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               textTransform: 'uppercase',
               letterSpacing: '0.12em',
               color: 'rgb(var(--color-hazard))',
@@ -317,7 +317,7 @@ export default function Page() {
           <p
             style={{
               fontSize: '0.8rem',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               color: 'rgb(var(--color-text, 203 213 225))',
               margin: 0,
               lineHeight: 1.6,

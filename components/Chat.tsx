@@ -57,7 +57,7 @@ export default function Chat({ messages, onSend }: ChatProps) {
           style={{
             fontSize: '0.625rem',
             fontWeight: 700,
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             textTransform: 'uppercase',
             letterSpacing: '0.18em',
             color: 'rgb(100 116 139)',
@@ -69,7 +69,7 @@ export default function Chat({ messages, onSend }: ChatProps) {
           style={{
             marginLeft: 'auto',
             fontSize: '0.5625rem',
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: 'var(--font-mono), monospace',
             color: 'rgb(51 65 85)',
           }}
         >
@@ -94,7 +94,7 @@ export default function Chat({ messages, onSend }: ChatProps) {
           <p
             style={{
               fontSize: '0.625rem',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               color: 'rgb(51 65 85)',
               textAlign: 'center',
               textTransform: 'uppercase',

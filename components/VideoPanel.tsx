@@ -52,7 +52,7 @@ export default function VideoPanel({ localStream, remoteStream, callActive }: Vi
           <p
             style={{
               fontSize: '0.625rem',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               color: 'rgb(71 85 105)',
               textTransform: 'uppercase',
               letterSpacing: '0.12em',
@@ -64,7 +64,7 @@ export default function VideoPanel({ localStream, remoteStream, callActive }: Vi
           <p
             style={{
               fontSize: '0.5625rem',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               color: 'rgb(51 65 85)',
               margin: 0,
             }}
@@ -119,7 +119,7 @@ export default function VideoPanel({ localStream, remoteStream, callActive }: Vi
           <p
             style={{
               fontSize: '0.625rem',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono), monospace',
               color: 'rgb(var(--color-primary))',
               textTransform: 'uppercase',
               letterSpacing: '0.12em',

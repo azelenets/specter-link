@@ -6,6 +6,7 @@ const createJestConfig = nextJest({ dir: './' });
 const config: Config = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  watchman: false,
   moduleNameMapper: {
     '^@azelenets/aegis-design-system$': '<rootDir>/__mocks__/@azelenets/aegis-design-system.tsx',
     '^@/(.*)$': '<rootDir>/$1',

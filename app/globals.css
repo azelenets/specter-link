@@ -5,6 +5,144 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.status-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at top, rgb(var(--color-primary) / 0.12), transparent 35%),
+    rgb(var(--color-bg-dark));
+}
+
+.status-card {
+  width: min(100%, 34rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgb(var(--color-panel-dark) / 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.status-code,
+.status-note {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+}
+
+.status-code {
+  color: rgb(var(--color-primary));
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+}
+
+.status-title {
+  margin: 0;
+  font-family: var(--font-brand), sans-serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.status-copy {
+  margin: 0;
+  color: rgb(203 213 225);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.status-button,
+.status-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgb(var(--color-border-dark));
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.status-button:hover,
+.status-link:hover {
+  transform: translateY(-1px);
+  border-color: rgb(var(--color-primary) / 0.5);
+}
+
+.status-button {
+  background: transparent;
+  color: #fff;
+}
+
+.status-button-primary,
+.status-link {
+  background: rgb(var(--color-primary));
+  border-color: rgb(var(--color-primary));
+  color: rgb(2 6 23);
+}
+
+.status-note {
+  color: rgb(100 116 139);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 640px) {
+  .status-card {
+    padding: 1.5rem;
+  }
+
+  .status-actions {
+    flex-direction: column;
+  }
+
+  .status-button,
+  .status-link {
+    width: 100%;
+  }
+}
+
 /* ─── Room-entry lobby ──────────────────────────────────────────────────────── */
 .room-entry {
   width: 100%;
@@ -48,7 +186,7 @@
   max-width: 82%;
   padding: 0.45rem 0.7rem;
   font-size: 0.72rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono), monospace;
   line-height: 1.55;
   word-break: break-word;
 }
@@ -128,7 +266,7 @@
   border-bottom: 1px solid rgb(var(--color-border-dark) / 0.5);
   color: rgb(203 213 225);
   font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono), monospace;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
