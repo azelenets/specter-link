@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/banner.svg" alt="SPECTER-LINK banner" width="100%"/>
+</p>
+
 # SPECTER-LINK
 
 > Browser-native, peer-to-peer video / audio / screen-share and text chat.  
@@ -7,7 +11,7 @@
 
 ## Prerequisites
 
-- **Node.js 20+** — the signaling server uses the `peer` (v2) package which requires Node 18+.
+- **Node.js 20+** — the signaling server uses the `peer` (v1) package which requires Node 18+.
 - Two browsers (or two devices) that can reach each other's network.
 
 ---
@@ -58,6 +62,10 @@ npm run dev
 | `npm run build` | Build Next.js for production |
 | `npm run start:server` | Peer signaling server only |
 | `npm run start:next` | Next.js production server only |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript check (app + server configs) |
+| `npm run test` | Jest test suite |
+| `npm run test:watch` | Jest in watch mode |
 
 ---
 
