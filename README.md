@@ -4,8 +4,8 @@
 
 # SPECTER-LINK
 
-> Browser-native, peer-to-peer video / audio / screen-share and text chat.  
-> No accounts. No server-side data storage. Direct WebRTC connections between peers.
+Browser-native, peer-to-peer video / audio / screen-share and text chat.  
+No accounts. No server-side data storage. Direct WebRTC connections between peers.
 
 ---
 
