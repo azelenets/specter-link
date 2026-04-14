@@ -7,6 +7,7 @@
     "dev": "concurrently \"ts-node --project tsconfig.server.json server/peer-server.ts\" \"next dev\"",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:e2e": "playwright test",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit && tsc --noEmit --project tsconfig.server.json",
     "build": "next build",
@@ -39,6 +40,7 @@
     "eslint-config-next": "^16.2.3",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
+    "@playwright/test": "^1.49.0",
     "lefthook": "^2.1.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.0"
