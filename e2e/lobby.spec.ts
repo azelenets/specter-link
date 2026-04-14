@@ -13,14 +13,13 @@ test.describe('Lobby', () => {
     await expect(page.getByText('Your Peer ID')).toBeVisible();
   });
 
-  test('shows spinner while peer ID is being generated', async ({ page }) => {
-    // The spinner is shown before the signaling server assigns an ID.
-    // It may disappear quickly, so we check it was rendered at some point
-    // OR that the peer ID display is already there.
-    const spinner = page.locator('[data-testid="spinner"], [class*="spinner"], [class*="Spinner"]').first();
+  test('shows generating state before peer ID arrives', async ({ page }) => {
+    // "Generating ID…" text is rendered alongside the spinner while waiting
+    // for the signaling server. By the time this assertion runs it may have
+    // already resolved — so we accept the peer ID display as well.
+    const generating = page.getByText('Generating ID…');
     const peerIdDisplay = page.locator('.truncate-id');
-    // At least one of them must be visible on load
-    await expect(spinner.or(peerIdDisplay)).toBeVisible();
+    await expect(generating.or(peerIdDisplay)).toBeVisible();
   });
 
   test('peer ID appears after connecting to signaling server', async ({ page }) => {
@@ -45,24 +44,22 @@ test.describe('Lobby', () => {
     await expect(page.getByText('Cannot connect to yourself')).toBeVisible();
   });
 
-  test('copy button reflects copied state', async ({ browser }) => {
-    const context = await browser.newContext({
-      permissions: ['clipboard-read', 'clipboard-write'],
-    });
-    const page = await context.newPage();
-    await page.goto('/');
+  test('copy button reflects copied state and writes to clipboard', async ({ page }) => {
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    // clipboard API requires the document to be focused
+    await page.bringToFront();
 
     const peerIdDisplay = page.locator('.truncate-id');
     await expect(peerIdDisplay).toBeVisible({ timeout: 15_000 });
     const ownId = (await peerIdDisplay.textContent()) ?? '';
 
-    await page.getByRole('button', { name: /Copy/i }).click();
-    await expect(page.getByRole('button', { name: 'Copied' })).toBeVisible();
+    // The button has a static aria-label="Copy peer ID"; check text content for state change
+    const copyButton = page.getByRole('button', { name: 'Copy peer ID' });
+    await copyButton.click();
+    await expect(copyButton).toContainText('Copied');
 
     const clipboard = await page.evaluate(() => navigator.clipboard.readText());
     expect(clipboard).toBe(ownId.trim());
-
-    await context.close();
   });
 
   test('shows privacy note', async ({ page }) => {

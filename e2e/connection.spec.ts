@@ -1,4 +1,11 @@
-import { test, expect, type BrowserContext, type Page } from '@playwright/test';
+import { test, expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
+
+const BASE_URL = 'http://localhost:3000';
+
+const CHROMIUM_ARGS = [
+  '--host-resolver-rules=MAP stun.l.google.com 127.0.0.1,MAP stun1.l.google.com 127.0.0.1',
+  '--disable-features=WebRtcHideLocalIpsWithMdns',
+];
 
 /** Wait for a peer to receive its ID from the signaling server. */
 async function waitForPeerId(page: Page): Promise<string> {
@@ -17,28 +24,45 @@ async function connectPeers(pageA: Page, pageB: Page): Promise<void> {
 
   // Both sides must reach in-room state (Leave Room button appears)
   await Promise.all([
-    expect(pageA.getByRole('button', { name: 'Leave Room' }).first()).toBeVisible({ timeout: 10_000 }),
-    expect(pageB.getByRole('button', { name: 'Leave Room' }).first()).toBeVisible({ timeout: 10_000 }),
+    expect(pageA.getByRole('button', { name: 'Leave Room' }).first()).toBeVisible({ timeout: 20_000 }),
+    expect(pageB.getByRole('button', { name: 'Leave Room' }).first()).toBeVisible({ timeout: 20_000 }),
   ]);
 }
 
 test.describe('Two-peer connection', () => {
+  // Each test gets its own browser instances so WebRTC ICE/DTLS state and
+  // PeerJS WebSocket connections never bleed between tests.
+  let browserA: Browser;
+  let browserB: Browser;
   let contextA: BrowserContext;
   let contextB: BrowserContext;
   let pageA: Page;
   let pageB: Page;
 
-  test.beforeEach(async ({ browser }) => {
-    contextA = await browser.newContext();
-    contextB = await browser.newContext();
-    pageA = await contextA.newPage();
-    pageB = await contextB.newPage();
-    await Promise.all([pageA.goto('/'), pageB.goto('/')]);
+  test.beforeEach(async ({ playwright }) => {
+    [browserA, browserB] = await Promise.all([
+      playwright.chromium.launch({ args: CHROMIUM_ARGS }),
+      playwright.chromium.launch({ args: CHROMIUM_ARGS }),
+    ]);
+    [contextA, contextB] = await Promise.all([
+      browserA.newContext(),
+      browserB.newContext(),
+    ]);
+    [pageA, pageB] = await Promise.all([
+      contextA.newPage(),
+      contextB.newPage(),
+    ]);
+    await Promise.all([
+      pageA.goto(BASE_URL),
+      pageB.goto(BASE_URL),
+    ]);
   });
 
   test.afterEach(async () => {
-    await contextA.close();
-    await contextB.close();
+    await Promise.all([
+      browserA.close(),
+      browserB.close(),
+    ]);
   });
 
   test('both peers enter the room after connecting', async () => {

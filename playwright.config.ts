@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './e2e',
-  timeout: 30_000,
+  timeout: 40_000,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'github' : 'list',
@@ -10,6 +10,12 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
+    launchOptions: {
+      args: [
+        '--host-resolver-rules=MAP stun.l.google.com 127.0.0.1,MAP stun1.l.google.com 127.0.0.1',
+        '--disable-features=WebRtcHideLocalIpsWithMdns',
+      ],
+    },
   },
 
   projects: [
